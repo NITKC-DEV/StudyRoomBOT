@@ -40,23 +40,31 @@ module.exports =
                     let color;
                     let rank;
                     if(hour >= 48){
+                        color = 0x6DBCD1
+                        rank = "Platinum";
+                    }
+                    else if(hour >= 42){
+                        color = 0xFFEB99
+                        rank = "Gold";
+                    }
+                    else if(hour >= 35){
                         color = 0xF00400
                         rank = "Red";
                     }
-                    else if(hour >= 42){
+                    else if(hour >= 24){
                         color = 0xF47A00
                         rank = "Orange"
                     }
-                    else if(hour >= 35){
+                    else if(hour >= 20){
                         color = 0xBCBC00
                         rank = "Yellow"
                     }
-                    else if(hour >= 24){
+                    else if(hour >= 14){
                         color = 0x0000F4
                         rank = "Blue"
                     }
-                    else if(hour >= 14){
-                        color = 0x00B8B8
+                    else if(hour >= 10){
+                        color = 0x00B5F7
                         rank = "Light Blue"
                     }
                     else if(hour >= 7){
