@@ -7,7 +7,7 @@ module.exports =
         {
             data: new SlashCommandBuilder()
                 .setName('studydate')
-                .setDescription('自習室のデータを表示します')
+                .setDescription('自習室の日別データを表示します')
                 .addUserOption(option =>
                     option
                         .setName('ユーザー')
@@ -111,6 +111,113 @@ module.exports =
                             {
                                 name:"累計勉強時間",
                                 value:Math.floor(user.StudyAll/360)/10 + "時間"
+                            }
+                        )
+                        .setTimestamp()
+                        .setFooter({ text: 'Developed by NITKC-22DEV' ,iconURL: 'https://avatars.githubusercontent.com/u/107338867?s=200&v=4'});
+                }
+                await interaction.reply({ embeds: [embed] });
+            },
+        },
+        {
+            data: new SlashCommandBuilder()
+                .setName('studyweek')
+                .setDescription('自習室の週別データを表示します')
+                .addUserOption(option =>
+                    option
+                        .setName('ユーザー')
+                        .setDescription('記録を見たいユーザーを指定します')
+                        .setRequired(true)
+                ),
+            async execute(interaction) {
+                //jsonの読み込みとユーザーデータの取り出し
+                const date = JSON.parse(fs.readFileSync('./studyroom.json', 'utf8'));
+                let option = interaction.options.data[0].value;
+                let user=date.date.find(date => date.uid === option);
+                let embed;
+                if(user === undefined){
+                    embed = new EmbedBuilder()
+                        .setColor(0xD9D9D9)
+                        .setTitle('データが見つかりません')
+                        .setAuthor({
+                            name: "StudyRoom DiscordBOT",
+                            iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
+                            url: 'https://discord.com/invite/fpEjBHTAqy'
+                        })
+                        .setDescription('データが存在しないか、破損しています。VCに参加してからもう一度試してください。それでもエラーが起きる場合は、管理者に連絡してください。')
+                        .setTimestamp()
+                        .setFooter({ text: 'Developed by NITKC-22DEV' ,iconURL: 'https://avatars.githubusercontent.com/u/107338867?s=200&v=4'});
+                }
+                else{
+                    let hour = user.study.reduce((sum, element) => sum + element, 0)/3600;
+                    let color;
+                    let rank;
+                    if(hour >= 48){
+                        color = 0x6DBCD1
+                        rank = "Platinum";
+                    }
+                    else if(hour >= 42){
+                        color = 0xFFEB99
+                        rank = "Gold";
+                    }
+                    else if(hour >= 35){
+                        color = 0xF00400
+                        rank = "Red";
+                    }
+                    else if(hour >= 24){
+                        color = 0xF47A00
+                        rank = "Orange"
+                    }
+                    else if(hour >= 20){
+                        color = 0xBCBC00
+                        rank = "Yellow"
+                    }
+                    else if(hour >= 14){
+                        color = 0x0000F4
+                        rank = "Blue"
+                    }
+                    else if(hour >= 10){
+                        color = 0x00B5F7
+                        rank = "Light Blue"
+                    }
+                    else if(hour >= 7){
+                        color = 0x007B00
+                        rank = "Green"
+                    }
+                    else if(hour >= 3){
+                        color = 0x7C3E00
+                        rank = "Brown"
+                    }
+                    else{
+                        color = 0xD9D9D9
+                        rank = "Gray"
+                    }
+                    let dt = new Date();
+                    let dayofweek = dt.getDay();
+                    let week = 0;
+                    if(dayofweek === 0)dayofweek = 7;
+                    for(let i=0;i<dayofweek;i++){ //今日分まで足し算して今週の時刻計算
+                        week += user.study[i]
+                    }
+
+                    embed = new EmbedBuilder()
+                        .setColor(color)
+                        .setTitle(user.name + 'の自習室データ')
+                        .setAuthor({
+                            name: "StudyRoom DiscordBOT",
+                            iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
+                            url: 'https://discord.com/invite/fpEjBHTAqy'
+                        })
+                        .setThumbnail(user.icon)
+                        .setDescription("現在のランク：" + rank + "\n")
+                        .addFields(
+                            {
+                                name:"累計勉強時間",
+                                value:Math.floor(user.StudyAll/360)/10 + "時間"
+                            },
+                            {
+                                name:"直近5週間の勉強時間",
+                                value:"今 週 ：" + Math.floor(week/360)/10 + "時間\n先 週 ：" + Math.floor(user.studyWeek[0]/360)/10 + "時間\n2週前：" + Math.floor(user.studyWeek[1]/360)/10 + "時間\n3週前：" + Math.floor(user.studyWeek[2]/360)/10 + "時間\n4週前：" + Math.floor(user.studyWeek[3]/360)/10 + "時間\n",
                             }
                         )
                         .setTimestamp()

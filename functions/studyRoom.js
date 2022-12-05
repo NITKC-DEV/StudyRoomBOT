@@ -26,7 +26,9 @@ exports.func = async function studyroom(oldState, newState){
                 "StudyAll": 0,
                 "task":[0,0,0,0,0,0,0],
                 "TaskAll": 0,
-                "now": false
+                "now": false,
+                "StudyWeek": [0,0,0,0],
+                "TaskWeek": [0,0,0,0]
             })
         date.date[date.date.length - 1].uid = String(newState.id); //id取得
         user=date.date[date.date.length - 1];
@@ -93,6 +95,18 @@ exports.update = function (){
         console.log(user.name+"さんがVCに入ったまま日付をまたぎました！");
         user.lastJoin = UNIX;
         date.date[userPoint]=user
+    }
+
+    //月曜日に週の記録書き込み
+    let dt = new Date();
+    let dayofweek = dt.getDay();
+    if (dayofweek === 2) {
+        for(let i=0;i<date.date.length;i++){
+            for(let j=4;j>0;j--){
+                date.date[i].studyWeek[j] = date.date[i].studyWeek[j-1];
+            }
+            date.date[i].studyWeek[0] = date.date[i].study.reduce((sum, element) => sum + element, 0);;
+        }
     }
 
     /*日付を1日ずらす作業*/
