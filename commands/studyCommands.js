@@ -200,7 +200,7 @@ module.exports =
                     for(let i=0;i<dayofweek;i++){ //今日分まで足し算して今週の時刻計算
                         week += user.study[i]
                     }
-                    let All =Math.floor(week/360)/10 + Math.floor(user.studyWeek[0]/360)/10 + Math.floor(user.studyWeek[1]/360)/10 + Math.floor(user.studyWeek[2]/360)/10 + Math.floor(user.studyWeek[3]/360)/10
+                    let All =Math.floor(week/360)/10 + Math.floor(user.StudyWeek[0]/360)/10 + Math.floor(user.StudyWeek[1]/360)/10 + Math.floor(user.StudyWeek[2]/360)/10 + Math.floor(user.StudyWeek[3]/360)/10
                     embed = new EmbedBuilder()
                         .setColor(color)
                         .setTitle(user.name + 'の自習室データ')
@@ -214,7 +214,7 @@ module.exports =
                         .addFields(
                             {
                                 name:"直近5週間の勉強時間",
-                                value:"今 週 ：" + Math.floor(week/360)/10 + "時間\n先 週 ：" + Math.floor(user.studyWeek[0]/360)/10 + "時間\n2週前：" + Math.floor(user.studyWeek[1]/360)/10 + "時間\n3週前：" + Math.floor(user.studyWeek[2]/360)/10 + "時間\n4週前：" + Math.floor(user.studyWeek[3]/360)/10 + "時間\n",
+                                value:"今 週 ：" + Math.floor(week/360)/10 + "時間\n先 週 ：" + Math.floor(user.StudyWeek[0]/360)/10 + "時間\n2週前：" + Math.floor(user.StudyWeek[1]/360)/10 + "時間\n3週前：" + Math.floor(user.StudyWeek[2]/360)/10 + "時間\n4週前：" + Math.floor(user.StudyWeek[3]/360)/10 + "時間\n",
                             },
                             {
                                 name:"直近5週間の平均勉強時間",
