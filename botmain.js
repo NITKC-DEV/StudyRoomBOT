@@ -1,6 +1,7 @@
-const { Client, GatewayIntentBits, Partials, Collection} = require('discord.js');
-const config = require('./config.json')
+const { Client, GatewayIntentBits, Partials, Collection, EmbedBuilder} = require('discord.js');
+let config = require('./config.json')
 const studyroom = require('./functions/studyRoom.js');
+const join = require('./functions/joinFunc.js')
 const dotenv = require('dotenv');
 const path = require('path');
 const fs = require('fs');
@@ -14,7 +15,8 @@ const client = new Client({
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.GuildMessageReactions,
-        GatewayIntentBits.MessageContent
+        GatewayIntentBits.MessageContent,
+
     ],
     partials: [Partials.Channel],
 });
@@ -63,6 +65,78 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 
 cron.schedule('0 0 * * *',() => {
     studyroom.update();
+})
+
+// ステータス設定
+cron.schedule('* * * * *',() => {
+    let date = new Date();
+    let json = JSON.parse(fs.readFileSync('./studyroom.json', 'utf8'));
+    let user = json.date.length
+    let time = Math.floor(date.getTime() / 1000 / 60)%6
+    let now = json.date.filter(function(item, index){ /*今入ってる人を列挙*/
+        if (item.now === true ) return true;
+    });
+
+    if(time === 0){
+        client.user.setPresence({
+            activities: [{
+                name: client.guilds.cache.size+"サーバーに導入中"
+            }],
+        });
+    }
+    else if(time === 1){
+        client.user.setPresence({
+            activities: [{
+                name: user+"人のセーブデータ登録済み"
+            }],
+        });
+    }
+    else if(time === 2){
+        client.user.setPresence({
+            activities: [{
+                name: "ヘルプ：/help"
+            }],
+        });
+    }
+    else if(time === 3){
+        client.user.setPresence({
+            activities: [{
+                name: "日別データ：/studydate"
+            }],
+        });
+    }
+    else if(time === 4){
+        client.user.setPresence({
+            activities: [{
+                name: "週別データ：/studyweek"
+            }],
+        });
+    }
+    else{
+        client.user.setPresence({
+            activities: [{
+                name: now.length + "人が勉強"
+            }],
+        });
+    }
+})
+
+/*BOT参加時*/
+client.on('guildCreate', async guild => {
+    await join.bot(guild)
+    console.log("ギルド参加処理")
+})
+
+/*ユーザー参加時*/
+client.on('guildMemberAdd', async member => {
+    await join.user(member)
+    console.log("ユーザー参加処理")
+})
+
+/*ユーザー退出時*/
+client.on('guildMemberRemove', async member => {
+    await join.rmuser(member)
+    console.log("ユーザー退出処理")
 })
 
 client.login(config.token);
