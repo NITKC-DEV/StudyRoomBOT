@@ -1,11 +1,15 @@
 /*自習室機能 VC部分*/
-const { Client, GatewayIntentBits, Partials} = require('discord.js');
+const { Client, GatewayIntentBits, Partials,GuildMember} = require('discord.js');
 const fs = require('fs');
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildVoiceStates,
         GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.MessageContent,
+
     ],
     partials: [Partials.Channel],
 });
@@ -40,6 +44,7 @@ exports.func = async function studyroom(oldState, newState){
     let username = userDate.username;
     let discriminator=userDate.discriminator;
     let icon = userDate.displayAvatarURL()
+    let members =
     user.name = username + '#' + discriminator;
     user.icon = icon;
 
@@ -50,6 +55,14 @@ exports.func = async function studyroom(oldState, newState){
             console.log(user.name+" join VC");
             user.lastJoin = UNIX; //参加した時刻を書き込み
             user.now = true;
+            for(let i=0;i<user.guild.length;i++){
+                let role = config.role.find(date => date.guild === user.guild.at(i));
+                let guild = client.guilds.cache.get(user.guild.at(i))
+                await guild.members.addRole({
+                    user: newState.id,
+                    role: role.id
+                })
+            }
         }
     }
     else if(newState.channel===null){
