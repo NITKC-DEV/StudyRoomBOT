@@ -71,6 +71,15 @@ exports.func = async function studyroom(oldState, newState){
             user.study[0] += UNIX-user.lastJoin;
             console.log(user.name+" leave VC");
             user.now = false;
+
+            for(let i=0;i<user.guild.length;i++){
+                let role = config.role.find(date => date.guild === user.guild.at(i));
+                let guild = client.guilds.cache.get(user.guild.at(i))
+                await guild.members.removeRole({
+                    user: newState.id,
+                    role: role.id
+                })
+            }
         }
     }
     else{
@@ -78,10 +87,28 @@ exports.func = async function studyroom(oldState, newState){
             user.StudyAll += UNIX-user.lastJoin;
             user.study[0] += UNIX-user.lastJoin;
             user.now = false;
+
+            for(let i=0;i<user.guild.length;i++){
+                let role = config.role.find(date => date.guild === user.guild.at(i));
+                let guild = client.guilds.cache.get(user.guild.at(i))
+                await guild.members.removeRole({
+                    user: newState.id,
+                    role: role.id
+                })
+            }
         }
         if(config.studyVC.indexOf(newState.channelId)!==-1){
             user.lastJoin = UNIX; //参加した時刻を書き込み
             user.now = true;
+
+            for(let i=0;i<user.guild.length;i++){
+                let role = config.role.find(date => date.guild === user.guild.at(i));
+                let guild = client.guilds.cache.get(user.guild.at(i))
+                await guild.members.addRole({
+                    user: newState.id,
+                    role: role.id
+                })
+            }
         }
         console.log(user.name+" change VC");
     }
