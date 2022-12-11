@@ -8,10 +8,12 @@ const client = new Client({
     ],
     partials: [Partials.Channel],
 });
-let date = JSON.parse(fs.readFileSync('./studyroom.json', 'utf8'));
-const config = require('../config.json')
+const token = require('../config.json')
+
 
 exports.bot = async function join(guild){
+    let config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
+
     let role=config.role.find(item => item.guild === guild.id);
     const newRole = await guild.roles.create({
         name: 'Studying now',
@@ -108,6 +110,9 @@ exports.bot = async function join(guild){
 }
 
 exports.user = async function newUser(guild){
+    let date = JSON.parse(fs.readFileSync('./studyroom.json', 'utf8'));
+    let config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
+
     if(guild.user.bot === false){
         let userDate=await client.users.fetch(guild.user.id);
         let username = userDate.username;
@@ -140,6 +145,9 @@ exports.user = async function newUser(guild){
 }
 
 exports.rmuser = async function rmUser(guild){
+    let date = JSON.parse(fs.readFileSync('./studyroom.json', 'utf8'));
+    let config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
+
     if(guild.user.bot === false){
         let userDate=await client.users.fetch(guild.user.id);
         let username = userDate.username;
@@ -158,4 +166,4 @@ exports.rmuser = async function rmUser(guild){
     }
 }
 
-client.login(config.token);
+client.login(token.token);

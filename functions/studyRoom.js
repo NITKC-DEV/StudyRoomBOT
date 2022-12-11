@@ -13,10 +13,12 @@ const client = new Client({
     ],
     partials: [Partials.Channel],
 });
-const date = JSON.parse(fs.readFileSync('./studyroom.json', 'utf8'));
-const config = require('../config.json')
+
+const token = require('../config.json')
 
 exports.func = async function studyroom(oldState, newState){
+    const date = JSON.parse(fs.readFileSync('./studyroom.json', 'utf8'));
+    let config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
     let time = new Date();
     let UNIX=time.getTime()/1000; //UNIXTime
     let user=date.date.find(date => date.uid === oldState.id); /*その人のデータ*/
@@ -81,6 +83,7 @@ exports.func = async function studyroom(oldState, newState){
                 })
             }
         }
+        user.now = false
     }
     else{
         if(config.studyVC.indexOf(oldState.channelId)!==-1){
@@ -118,6 +121,8 @@ exports.func = async function studyroom(oldState, newState){
 
 
 exports.update = function (){
+    const date = JSON.parse(fs.readFileSync('./studyroom.json', 'utf8'));
+    let config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
     /*0時に切断したことにする*/
     let time = new Date();
     let UNIX=time.getTime()/1000; //UNIXTime
@@ -166,4 +171,4 @@ exports.update = function (){
     fs.writeFileSync('./studyroom.json', JSON.stringify(date,null ,"\t")); //json書き出し
 }
 
-client.login(config.token);
+client.login(token.token);
