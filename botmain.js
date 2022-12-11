@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits, Partials, Collection, EmbedBuilder} = require('discord.js');
-const config = require('./config.json')
+let config = require('./config.json')
 const studyroom = require('./functions/studyRoom.js');
 const dotenv = require('dotenv');
 const path = require('path');
@@ -121,9 +121,28 @@ cron.schedule('* * * * *',() => {
 })
 
 /*BOT参加時*/
-client.on('guildCreate', guild => {
-
-
+client.on('guildCreate', async guild => {
+    //ロール作成
+    let role=config.role.find(item => item.guild === guild.id);
+    const newRole = await guild.roles.create({
+        name: 'Studying now',
+        color: 0x00A0EA,
+        reason: "StudyRoom BOTの操作により作成"
+    });
+    if(role === undefined){
+        config.role.push({
+            guild:guild.id,
+            id:newRole.id
+        })
+    }
+    else{
+        let point = config.role.indexOf(role)
+        config.role[point]={
+            guild:guild.id,
+            id:newRole.id
+        }
+    }
+    fs.writeFileSync('./config.json', JSON.stringify(config,null ,"\t"));
 
     //お知らせ
     let embed = new EmbedBuilder()
@@ -137,27 +156,28 @@ client.on('guildCreate', guild => {
         .setDescription('ボイスチャットに接続している時間を勉強している時間とみなし、勉強時間を記録してくれるBOTです。\n以下に簡単な説明を記載します。')
         .addFields(
             {
-                name:"勉強時間記録方法",
-                value:"対象のVCに接続するだけです。切断すると、記録は終了します。"
+                name: "勉強時間記録方法",
+                value: "対象のVCに接続するだけです。切断すると、記録は終了します。"
             },
             {
-                name:"記録確認方法",
-                value:"以下のコマンドで、データを確認できます。\n日別データ：/studydate\n週別データ：/studyweek"
+                name: "記録確認方法",
+                value: "以下のコマンドで、データを確認できます。\n日別データ：/studydate\n週別データ：/studyweek"
             },
             {
-                name:"その他",
-                value:"わからないことがあれば、/help コマンドを使用してください。"
+                name: "その他",
+                value: "わからないことがあれば、/help コマンドを使用してください。"
             },
             {
-                name:"管理者の皆さんへ",
-                value:"管理者向けのヘルプがあります。VCの追加方法等が書いてあるので、一度確認をお願いします。\n/adminhelp を実行してください。"
+                name: "管理者の皆さんへ",
+                value: "管理者向けのヘルプがあります。VCの追加方法等が書いてあるので、一度確認をお願いします。\n/admin を実行してください。"
             }
-
-
         )
         .setTimestamp()
-        .setFooter({ text: 'Developed by NITKC-22DEV' ,iconURL: 'https://avatars.githubusercontent.com/u/107338867?s=200&v=4'});
-    client.channels.cache.get(guild.systemChannelId).send({ embeds: [embed] });
+        .setFooter({
+            text: 'Developed by NITKC-22DEV',
+            iconURL: 'https://avatars.githubusercontent.com/u/107338867?s=200&v=4'
+        });
+    client.channels.cache.get(guild.systemChannelId).send({embeds: [embed]});
 })
 
 client.login(config.token);
