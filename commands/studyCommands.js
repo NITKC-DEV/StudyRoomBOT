@@ -228,26 +228,26 @@ module.exports =
         },
         {
             data: new SlashCommandBuilder()
-                .setName('studyroom')
-                .setDescription('Studyroom DiscordBOTの説明です'),
+                .setName('help')
+                .setDescription('StudyroomBOTの説明です'),
             async execute(interaction) {
                 const embed = new EmbedBuilder()
                     .setColor(0x00A0EA)
-                    .setTitle('About StudyRoom')
+                    .setTitle('StudyRoomBOT - ヘルプ')
                     .setAuthor({
                         name: "StudyRoom DiscordBOT",
                         iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
                         url: 'https://discord.com/invite/fpEjBHTAqy'
                     })
-                    .setDescription('ボイスチャットに接続している時間を勉強している時間とみなし、勉強時間を記録してくれるツールです。')
+                    .setDescription('ボイスチャットに接続している時間を勉強している時間とみなし、勉強時間を記録してくれるBOTです。')
                     .addFields(
                         {
                             name:"対象ボイスチャット",
-                            value:"コマンドで自習室に追加すると、対象のVCに追加できます。\n管理者は、以下のコマンドで追加や削除を行えます。\n追加：/studyroomadd\n削除：/studyroomdel"
+                            value:"管理者が設定したVCのみが記録の対象となります。管理者の方で詳しく知りたい場合は、/admin を実行してください。"
                         },
                         {
                             name:"データ確認方法",
-                            value:"/studydate コマンドを使用してください。なお、一度も記録をしてない場合はデータがないので、対象のボイスチャットに一度参加してから実行してみてください。"
+                            value:"以下のコマンドで、データを確認できます。\n日別データ：/studydate\n週別データ：/studyweek\nなお、一度も記録をしてない場合はデータがないので、対象のボイスチャットに一度参加してから実行してみてください。"
                         },
                         {
                             name:"ランク",
@@ -256,11 +256,11 @@ module.exports =
                         {
                             name:"サポート",
                             value:"エラーの報告や、質問、新機能の提案等はこちらの[サポートサーバー](https://discord.com/invite/fpEjBHTAqy)で対応しています。"
-                        },/*
+                        },
                         {
                             name:"招待リンク",
                             value:"[こちらのリンク](https://00m.in/gY6eP)から招待することができます。"
-                        }*/
+                        }
 
 
                     )
@@ -268,6 +268,55 @@ module.exports =
                     .setFooter({ text: 'Developed by NITKC-22DEV' ,iconURL: 'https://avatars.githubusercontent.com/u/107338867?s=200&v=4'});
                 await interaction.reply({ embeds: [embed] });
             },
+        },
+        {
+            data: new SlashCommandBuilder()
+                .setName('admin')
+                .setDefaultMemberPermissions(1<<3) //管理者専用
+                .setDescription('StudyRoomBOTの管理者向けメッセージです'),
+            async execute(interaction) {
+                const embed = new EmbedBuilder()
+                    .setColor(0x00A0EA)
+                    .setTitle('管理者の皆さんへ')
+                    .setAuthor({
+                        name: "StudyRoom DiscordBOT",
+                        iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
+                        url: 'https://discord.com/invite/fpEjBHTAqy'
+                    })
+                    .setDescription('StudyRoomBOTの導入ありがとうございます。以下に管理者向けの説明を記載します。')
+                    .addFields(
+                        {
+                            name: "対象VC管理方法",
+                            value: "管理したいVCに入りながら以下のコマンドを実行することで管理できます。\n追加：/studyroomadd\n削除：/studyroomdel"
+                        },
+                        {
+                            name: "おすすめの使用方法 - VC",
+                            value: "全員の発言権がない、静かに自習するVCと、発言権がありみんなで教え合いながら勉強するVCを用意することで、様々なニーズに答えることが可能になります。是非参考にしてみてください。"
+                        },
+                        {
+                            name: "おすすめの使用方法 - 勉強中ロール",
+                            value: "勉強中は、その人に「StudyingNow」というロールが付与されます。このロールの権限を上位に持っていき、チャンネル閲覧制限をかけることにより、勉強中はDiscordの誘惑から遮断される　などの工夫ができます。ぜひ活用ください。"
+                        },
+                        {
+                            name: "BOTのアップデートのついて",
+                            value: "日々BOTを良くするために開発を続けています。そのため、不定期でアップデートやメンテナンスを行います。アップデートやメンテナンスの情報は[サポートサーバー](https://discord.com/invite/fpEjBHTAqy)にて配信しているので、ぜひ参加してください。アナウンスチャンネルもあるので、ぜひ活用してください。"
+                        },
+                        {
+                            name: "エラー発生時",
+                            value: "エラーが発生しないよう日々努力していますが、たまにエラーが発生したりbotが停止することがあります。その場合は、[サポートサーバー](https://discord.com/invite/fpEjBHTAqy)にて連絡をしてもらえると助かります。"
+                        },
+                        {
+                            name: "その他",
+                            value: "質問や意見、提案等は遠慮なくこちらの[サポートサーバー](https://discord.com/invite/fpEjBHTAqy)からお問い合わせください。"
+                        }
+                    )
+                    .setTimestamp()
+                    .setFooter({
+                        text: 'Developed by NITKC-22DEV',
+                        iconURL: 'https://avatars.githubusercontent.com/u/107338867?s=200&v=4'
+                    });
+                await interaction.reply({embeds: [embed], ephemeral: true});
+            }
         },
         {
             data: new SlashCommandBuilder()
@@ -333,7 +382,7 @@ module.exports =
                     }
                 }
             },
-        },
+        },/*Twitter連携機能(実験機能)
         {
             data: new SlashCommandBuilder()
                 .setName('twitter')
@@ -390,5 +439,5 @@ module.exports =
                     });
                 await interaction.reply({ content: "ダイレクトメッセージを送信しました。確認してください。", ephemeral: true });
             },
-        },
+        },*/
     ]

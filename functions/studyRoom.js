@@ -100,7 +100,7 @@ exports.update = function (){
     //月曜日に週の記録書き込み
     let dt = new Date();
     let dayofweek = dt.getDay();
-    if (dayofweek === 2) {
+    if (dayofweek === 3) {
         for(let i=0;i<date.date.length;i++){
             for(let j=4;j>0;j--){
                 date.date[i].studyWeek[j] = date.date[i].studyWeek[j-1];
