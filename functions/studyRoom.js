@@ -28,7 +28,8 @@ exports.func = async function studyroom(oldState, newState){
                 "TaskAll": 0,
                 "now": false,
                 "StudyWeek": [0,0,0,0],
-                "TaskWeek": [0,0,0,0]
+                "TaskWeek": [0,0,0,0],
+                "guild":[oldState.guild.id]
             })
         date.date[date.date.length - 1].uid = String(newState.id); //id取得
         user=date.date[date.date.length - 1];

@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, GuildMember} = require('discord.js')
 const fs = require("fs");
 const date = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
+const packageVer = require('../package.json')
 
 module.exports =
     [
@@ -199,7 +200,7 @@ module.exports =
                     for(let i=0;i<dayofweek;i++){ //今日分まで足し算して今週の時刻計算
                         week += user.study[i]
                     }
-
+                    let All =Math.floor(week/360)/10 + Math.floor(user.studyWeek[0]/360)/10 + Math.floor(user.studyWeek[1]/360)/10 + Math.floor(user.studyWeek[2]/360)/10 + Math.floor(user.studyWeek[3]/360)/10
                     embed = new EmbedBuilder()
                         .setColor(color)
                         .setTitle(user.name + 'の自習室データ')
@@ -212,12 +213,16 @@ module.exports =
                         .setDescription("現在のランク：" + rank + "\n")
                         .addFields(
                             {
-                                name:"累計勉強時間",
-                                value:Math.floor(user.StudyAll/360)/10 + "時間"
-                            },
-                            {
                                 name:"直近5週間の勉強時間",
                                 value:"今 週 ：" + Math.floor(week/360)/10 + "時間\n先 週 ：" + Math.floor(user.studyWeek[0]/360)/10 + "時間\n2週前：" + Math.floor(user.studyWeek[1]/360)/10 + "時間\n3週前：" + Math.floor(user.studyWeek[2]/360)/10 + "時間\n4週前：" + Math.floor(user.studyWeek[3]/360)/10 + "時間\n",
+                            },
+                            {
+                                name:"直近5週間の平均勉強時間",
+                                value:"1日：" + (Math.floor(All/5/7*10)/10) + "時間\n1週間：" + (Math.floor(All/5*10)/10) + "時間"
+                            },
+                            {
+                                name:"累計勉強時間",
+                                value:Math.floor(user.StudyAll/360)/10 + "時間"
                             }
                         )
                         .setTimestamp()
@@ -251,7 +256,7 @@ module.exports =
                         },
                         {
                             name:"ランク",
-                            value:"直近7日間の勉強時間に応じて、ランクが設定されます。ランクは以下のように設定されています。\n\n白金：48時間以上\n金色：42時間以上\n赤色：35時間以上\n橙色：24時間以上\n黄色：20時間以上\n青色：14時間以上\n水色：10時間以上\n緑色：7時間以上\n茶色：3時間以上\n灰色：3時間未満\n\n※このデータは小数点以下切り捨てで表示されるため、すべての値を合計しても合計値に届かないことがあります。"
+                            value:"直近7日間の勉強時間に応じて、ランクが設定されます。ランクは以下のように設定されています。\n\nプラチナ：48時間以上\n金色：42時間以上\n赤色：35時間以上\n橙色：24時間以上\n黄色：20時間以上\n青色：14時間以上\n水色：10時間以上\n緑色：7時間以上\n茶色：3時間以上\n灰色：3時間未満\n\n※このデータは小数点以下切り捨てで表示されるため、すべての値を合計しても合計値に届かないことがあります。"
                         },
                         {
                             name:"サポート",
@@ -260,6 +265,49 @@ module.exports =
                         {
                             name:"招待リンク",
                             value:"[こちらのリンク](https://00m.in/gY6eP)から招待することができます。"
+                        },
+                        {
+                            name:"このBOTの情報や開発者の情報",
+                            value:"/about コマンドを使用してください。"
+                        }
+
+
+                    )
+                    .setTimestamp()
+                    .setFooter({ text: 'Developed by NITKC-22DEV' ,iconURL: 'https://avatars.githubusercontent.com/u/107338867?s=200&v=4'});
+                await interaction.reply({ embeds: [embed] });
+            },
+        },
+        {
+            data: new SlashCommandBuilder()
+                .setName('about')
+                .setDescription('BOTの概要を表示します'),
+            async execute(interaction) {
+                const embed = new EmbedBuilder()
+                    .setColor(0x00A0EA)
+                    .setTitle('StudyRoomBOT - about')
+                    .setAuthor({
+                        name: "StudyRoom DiscordBOT",
+                        iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
+                        url: 'https://discord.com/invite/fpEjBHTAqy'
+                    })
+                    .setDescription('このBOTは、オープンソースで開発されています。[GitHub](https://github.com/NITKC22s/StudyRoomBOT)にソースコードがあります。')
+                    .addFields(
+                        {
+                            name:"BOTバージョン",
+                            value:'v' + packageVer.version
+                        },
+                        {
+                            name:"About NITKC-22DEV",
+                            value:"木更津高専1年生の学年非公式Discordサーバー向けに開発したBOTを、せっかくなら外部向けに公開しようという試みです。\nメンバーは[kokastar](https://github.com/starkoka)、[Naotiki](https://github.com/naotiki)、[KouRo](https://github.com/Kou-Ro)、[NXVZBGBFBEN](https://github.com/NXVZBGBFBEN)の4人です。"
+                        },
+                        {
+                            name:"このBOTの開発者",
+                            value:"[kokastar](https://github.com/starkoka)"
+                        },
+                        {
+                            name:"サポートサーバー",
+                            value:"NITKC-22DEVの[サポートサーバー](https://discord.com/invite/fpEjBHTAqy)内に専用のカテゴリがあります。"
                         }
 
 
