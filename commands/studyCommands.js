@@ -201,7 +201,7 @@ module.exports =
                 .setDescription('現在参加しているVCを自習室から削除します。'),
             async execute(interaction) {
 
-                //現在入ってるVC取得
+                //現在入ってるVCを取得
                 let user = interaction.user.id
                 let guild = interaction.guild
 
