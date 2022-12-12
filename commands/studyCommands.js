@@ -27,7 +27,7 @@ module.exports =
                         .setColor(0xD9D9D9)
                         .setTitle('データが見つかりません')
                         .setAuthor({
-                            name: "StudyRoom DiscordBOT",
+                            name: "StudyRoom BOT",
                             iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
                             url: 'https://discord.com/invite/fpEjBHTAqy'
                         })
@@ -94,7 +94,7 @@ module.exports =
                         .setColor(color)
                         .setTitle(user.name + 'の自習室データ')
                         .setAuthor({
-                            name: "StudyRoom DiscordBOT",
+                            name: "StudyRoom BOT",
                             iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
                             url: 'https://discord.com/invite/fpEjBHTAqy'
                         })
@@ -141,7 +141,7 @@ module.exports =
                         .setColor(0xD9D9D9)
                         .setTitle('データが見つかりません')
                         .setAuthor({
-                            name: "StudyRoom DiscordBOT",
+                            name: "StudyRoom BOT",
                             iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
                             url: 'https://discord.com/invite/fpEjBHTAqy'
                         })
@@ -205,7 +205,7 @@ module.exports =
                         .setColor(color)
                         .setTitle(user.name + 'の自習室データ')
                         .setAuthor({
-                            name: "StudyRoom DiscordBOT",
+                            name: "StudyRoom BOT",
                             iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
                             url: 'https://discord.com/invite/fpEjBHTAqy'
                         })
@@ -240,7 +240,7 @@ module.exports =
                     .setColor(0x00A0EA)
                     .setTitle('StudyRoomBOT - ヘルプ')
                     .setAuthor({
-                        name: "StudyRoom DiscordBOT",
+                        name: "StudyRoom BOT",
                         iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
                         url: 'https://discord.com/invite/fpEjBHTAqy'
                     })
@@ -287,7 +287,7 @@ module.exports =
                     .setColor(0x00A0EA)
                     .setTitle('StudyRoomBOT - about')
                     .setAuthor({
-                        name: "StudyRoom DiscordBOT",
+                        name: "StudyRoom BOT",
                         iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
                         url: 'https://discord.com/invite/fpEjBHTAqy'
                     })
@@ -327,7 +327,7 @@ module.exports =
                     .setColor(0x00A0EA)
                     .setTitle('管理者の皆さんへ')
                     .setAuthor({
-                        name: "StudyRoom DiscordBOT",
+                        name: "StudyRoom BOT",
                         iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
                         url: 'https://discord.com/invite/fpEjBHTAqy'
                     })
@@ -458,7 +458,7 @@ module.exports =
                     .setColor(0x1D9BF0)
                     .setTitle('Twitter連携機能設定')
                     .setAuthor({
-                        name: "StudyRoom DiscordBOT",
+                        name: "StudyRoom BOT",
                         iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
                         url: 'https://discord.com/invite/fpEjBHTAqy'
                     })

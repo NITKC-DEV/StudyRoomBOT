@@ -40,7 +40,7 @@ exports.bot = async function join(guild){
         .setColor(0x00A0EA)
         .setTitle('StudyRoomBOTを導入していただきありがとうございます')
         .setAuthor({
-            name: "StudyRoom DiscordBOT",
+            name: "StudyRoom BOT",
             iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
             url: 'https://discord.com/invite/fpEjBHTAqy'
         })
