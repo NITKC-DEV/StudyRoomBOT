@@ -430,5 +430,62 @@ module.exports =
                     }
                 }
             },
-        }
+        },/*Twitter連携機能(実験機能)
+        {
+            data: new SlashCommandBuilder()
+                .setName('twitter')
+                .setDescription('Twitter連携の設定を行います'),
+            async execute(interaction) {
+
+                let first,firstv,second,secondv;
+                if(false){ //Twitterアカウント連携の有無確認
+                    first = ":regional_indicator_a: Twitterアカウントデータ削除"
+                    firstv = "Twitterアカウントのデータを削除します。同時に、自動投稿も停止されます。"
+                    if(false){ //今週の記録投稿の有無確認
+                        second = ":regional_indicator_b: 今週の記録投稿 - 停止"
+                    }
+                    else{
+                        second = ":regional_indicator_b: 今週の記録投稿 - 有効化"
+                    }
+                }
+                else{
+                    first = ":regional_indicator_a: Twitterアカウント接続"
+                    firstv = "Twitterアカウントに接続をして、自動投稿の設定ができるようにします。"
+
+                    second = ":regional_indicator_b: 今週の記録投稿 - 有効化"
+                }
+                const embed = new EmbedBuilder()
+                    .setColor(0x1D9BF0)
+                    .setTitle('Twitter連携機能設定')
+                    .setAuthor({
+                        name: "StudyRoom DiscordBOT",
+                        iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
+                        url: 'https://discord.com/invite/fpEjBHTAqy'
+                    })
+                    .setDescription('Twitter連携機能の設定を行います。設定したい項目の絵文字をリアクションしてください。')
+                    .addFields(
+                        {
+                            name:first,
+                            value:firstv
+                        },
+                        {
+                            name:second,
+                            value:"毎週末に投稿される「今週の記録」の投稿の設定を切り替えます。"
+                        },
+
+
+
+                    )
+                    .setTimestamp()
+                    .setFooter({ text: 'Developed by NITKC-22DEV' ,iconURL: 'https://avatars.githubusercontent.com/u/107338867?s=200&v=4'});
+                interaction.client.users
+                    .fetch(interaction.user.id)
+                    .then(async (user) => {
+                        const dm = await user.send({embeds: [embed]});
+                        await dm.react("🇦")
+                        await dm.react("🇧")
+                    });
+                await interaction.reply({ content: "ダイレクトメッセージを送信しました。確認してください。", ephemeral: true });
+            },
+        },*/
     ]
