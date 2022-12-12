@@ -81,8 +81,10 @@ exports.bot = async function join(guild){
             let username = userDate.username;
             let discriminator=userDate.discriminator;
             let icon = userDate.displayAvatarURL()
-            let userPoint = date.date.indexOf(date.date.find(date => date.uid === guildMember.at(i).user.id))
-            if(userPoint === undefined){
+
+            let user=date.date.find(date => date.uid === guildMember.at(i).user.id);
+            let userPoint = date.date.indexOf(user)
+            if(user === undefined){
                 date.date.push({
                     "uid": guildMember.at(i).user.id,
                     "name": username + '#' + discriminator,
