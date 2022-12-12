@@ -44,8 +44,12 @@ exports.bot = async function join(guild){
             iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
             url: 'https://discord.com/invite/fpEjBHTAqy'
         })
-        .setDescription('ボイスチャットに接続している時間を勉強している時間とみなし、勉強時間を記録してくれるBOTです。\n以下に簡単な説明を記載します。')
+        .setDescription('現在、このサーバーに参加しているユーザーのデータを作成しています。人数が多いと時間がかかる可能性があります。\n以下にこのBOTについての簡単な説明を記載します。')
         .addFields(
+            {
+                name:"概要",
+                value:"ボイスチャットに接続している時間を勉強している時間とみなし、勉強時間を記録してくれるBOTです。"
+            },
             {
                 name: "勉強時間記録方法",
                 value: "対象のVCに接続するだけです。切断すると、記録は終了します。"
@@ -61,7 +65,7 @@ exports.bot = async function join(guild){
             {
                 name: "管理者の皆さんへ",
                 value: "管理者向けのヘルプがあります。VCの追加方法等が書いてあるので、一度確認をお願いします。\n/admin を実行してください。"
-            }
+            },
         )
         .setTimestamp()
         .setFooter({
@@ -101,7 +105,9 @@ exports.bot = async function join(guild){
                 })
             }
             else{
-                date.date.at(userPoint).guild.push(guild.id)
+                if(date.date.at(userPoint).guild.includes(guild.id) === false){
+                    date.date.at(userPoint).guild.push(guild.id)
+                }
                 date.date.at(userPoint).name = username + '#' + discriminator;//ついでにアイコンとか更新
                 date.date.at(userPoint).icon = icon;
             }
@@ -138,7 +144,9 @@ exports.user = async function newUser(guild){
             })
         }
         else{
-            date.date.at(userPoint).guild.push(guild.id)
+            if(date.date.at(userPoint).guild.includes(guild.id) === false){
+                date.date.at(userPoint).guild.push(guild.id)
+            }
             date.date.at(userPoint).name = username + '#' + discriminator;//ついでにアイコンとか更新
             date.date.at(userPoint).icon = icon;
         }

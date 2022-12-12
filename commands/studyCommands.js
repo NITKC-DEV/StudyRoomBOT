@@ -28,10 +28,10 @@ module.exports =
                         .setTitle('データが見つかりません')
                         .setAuthor({
                             name: "StudyRoom BOT",
-                            iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
+                            iconURL: 'https://cdn.discordapp.com/avatars/1046304160448000072/aa9294120328c547950c7d95f01435c9.webp?size=320',
                             url: 'https://discord.com/invite/fpEjBHTAqy'
                         })
-                        .setDescription('データが存在しないか、破損しています。VCに参加してからもう一度試してください。それでもエラーが起きる場合は、管理者に連絡してください。')
+                        .setDescription('データが存在しないか、破損しています。このBOTが追加されたばかりの場合は、データが作成中の可能性があります。そうでない場合、VCに参加してからもう一度試してください。それでもエラーが起きる場合は、管理者に連絡してください。')
                         .setTimestamp()
                         .setFooter({ text: 'Developed by NITKC-22DEV' ,iconURL: 'https://avatars.githubusercontent.com/u/107338867?s=200&v=4'});
                 }
@@ -95,7 +95,7 @@ module.exports =
                         .setTitle(user.name + 'の自習室データ')
                         .setAuthor({
                             name: "StudyRoom BOT",
-                            iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
+                            iconURL: 'https://cdn.discordapp.com/avatars/1046304160448000072/aa9294120328c547950c7d95f01435c9.webp?size=320',
                             url: 'https://discord.com/invite/fpEjBHTAqy'
                         })
                         .setThumbnail(user.icon)
@@ -142,10 +142,10 @@ module.exports =
                         .setTitle('データが見つかりません')
                         .setAuthor({
                             name: "StudyRoom BOT",
-                            iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
+                            iconURL: 'https://cdn.discordapp.com/avatars/1046304160448000072/aa9294120328c547950c7d95f01435c9.webp?size=320',
                             url: 'https://discord.com/invite/fpEjBHTAqy'
                         })
-                        .setDescription('データが存在しないか、破損しています。VCに参加してからもう一度試してください。それでもエラーが起きる場合は、管理者に連絡してください。')
+                        .setDescription('データが存在しないか、破損しています。このBOTが追加されたばかりの場合は、データが作成中の可能性があります。そうでない場合、VCに参加してからもう一度試してください。それでもエラーが起きる場合は、管理者に連絡してください。')
                         .setTimestamp()
                         .setFooter({ text: 'Developed by NITKC-22DEV' ,iconURL: 'https://avatars.githubusercontent.com/u/107338867?s=200&v=4'});
                 }
@@ -206,7 +206,7 @@ module.exports =
                         .setTitle(user.name + 'の自習室データ')
                         .setAuthor({
                             name: "StudyRoom BOT",
-                            iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
+                            iconURL: 'https://cdn.discordapp.com/avatars/1046304160448000072/aa9294120328c547950c7d95f01435c9.webp?size=320',
                             url: 'https://discord.com/invite/fpEjBHTAqy'
                         })
                         .setThumbnail(user.icon)
@@ -241,7 +241,7 @@ module.exports =
                     .setTitle('StudyRoomBOT - ヘルプ')
                     .setAuthor({
                         name: "StudyRoom BOT",
-                        iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
+                        iconURL: 'https://cdn.discordapp.com/avatars/1046304160448000072/aa9294120328c547950c7d95f01435c9.webp?size=320',
                         url: 'https://discord.com/invite/fpEjBHTAqy'
                     })
                     .setDescription('ボイスチャットに接続している時間を勉強している時間とみなし、勉強時間を記録してくれるBOTです。')
@@ -288,7 +288,7 @@ module.exports =
                     .setTitle('StudyRoomBOT - about')
                     .setAuthor({
                         name: "StudyRoom BOT",
-                        iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
+                        iconURL: 'https://cdn.discordapp.com/avatars/1046304160448000072/aa9294120328c547950c7d95f01435c9.webp?size=320',
                         url: 'https://discord.com/invite/fpEjBHTAqy'
                     })
                     .setDescription('このBOTは、オープンソースで開発されています。[GitHub](https://github.com/NITKC22s/StudyRoomBOT)にソースコードがあります。')
@@ -328,7 +328,7 @@ module.exports =
                     .setTitle('管理者の皆さんへ')
                     .setAuthor({
                         name: "StudyRoom BOT",
-                        iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
+                        iconURL: 'https://cdn.discordapp.com/avatars/1046304160448000072/aa9294120328c547950c7d95f01435c9.webp?size=320',
                         url: 'https://discord.com/invite/fpEjBHTAqy'
                     })
                     .setDescription('StudyRoomBOTの導入ありがとうございます。以下に管理者向けの説明を記載します。')
@@ -459,7 +459,7 @@ module.exports =
                     .setTitle('Twitter連携機能設定')
                     .setAuthor({
                         name: "StudyRoom BOT",
-                        iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
+                        iconURL: 'https://cdn.discordapp.com/avatars/1046304160448000072/aa9294120328c547950c7d95f01435c9.webp?size=320',
                         url: 'https://discord.com/invite/fpEjBHTAqy'
                     })
                     .setDescription('Twitter連携機能の設定を行います。設定したい項目の絵文字をリアクションしてください。')
