@@ -15,6 +15,7 @@ const client = new Client({
 });
 
 const token = require('../config.json')
+const {underscore} = require("@discordjs/builders");
 
 exports.func = async function studyroom(oldState, newState){
     const date = JSON.parse(fs.readFileSync('./studyroom.json', 'utf8'));
@@ -60,10 +61,17 @@ exports.func = async function studyroom(oldState, newState){
             for(let i=0;i<user.guild.length;i++){
                 let role = config.role.find(date => date.guild === user.guild.at(i));
                 let guild = client.guilds.cache.get(user.guild.at(i))
-                await guild.members.addRole({
-                    user: newState.id,
-                    role: role.id
-                })
+                if(guild === undefined){
+                    user.guild.splice(i,1)
+                    let index = config.role.indexOf(role)
+                    config.role.splice(index,1)
+                }
+                else{
+                    await guild.members.addRole({
+                        user: newState.id,
+                        role: role.id
+                    })
+                }
             }
         }
     }
@@ -77,10 +85,17 @@ exports.func = async function studyroom(oldState, newState){
             for(let i=0;i<user.guild.length;i++){
                 let role = config.role.find(date => date.guild === user.guild.at(i));
                 let guild = client.guilds.cache.get(user.guild.at(i))
-                await guild.members.removeRole({
-                    user: newState.id,
-                    role: role.id
-                })
+                if(guild === undefined){
+                    user.guild.splice(i,1)
+                    let index = config.role.indexOf(role)
+                    config.role.splice(index,1)
+                }
+                else{
+                    await guild.members.removeRole({
+                        user: newState.id,
+                        role: role.id
+                    })
+                }
             }
         }
         user.now = false
@@ -94,10 +109,17 @@ exports.func = async function studyroom(oldState, newState){
             for(let i=0;i<user.guild.length;i++){
                 let role = config.role.find(date => date.guild === user.guild.at(i));
                 let guild = client.guilds.cache.get(user.guild.at(i))
-                await guild.members.removeRole({
-                    user: newState.id,
-                    role: role.id
-                })
+                if(guild === undefined){
+                    user.guild.splice(i,1)
+                    let index = config.role.indexOf(role)
+                    config.role.splice(index,1)
+                }
+                else{
+                    await guild.members.removeRole({
+                        user: newState.id,
+                        role: role.id
+                    })
+                }
             }
         }
         if(config.studyVC.indexOf(newState.channelId)!==-1){
@@ -107,16 +129,24 @@ exports.func = async function studyroom(oldState, newState){
             for(let i=0;i<user.guild.length;i++){
                 let role = config.role.find(date => date.guild === user.guild.at(i));
                 let guild = client.guilds.cache.get(user.guild.at(i))
-                await guild.members.addRole({
-                    user: newState.id,
-                    role: role.id
-                })
+                if(guild === undefined){
+                    user.guild.splice(i,1)
+                    let index = config.role.indexOf(role)
+                    config.role.splice(index,1)
+                }
+                else{
+                    await guild.members.addRole({
+                        user: newState.id,
+                        role: role.id
+                    })
+                }
             }
         }
         console.log(user.name+" change VC");
     }
     date.date[userPoint]=user
     fs.writeFileSync('./studyroom.json', JSON.stringify(date,null ,"\t")); //json書き出し
+    fs.writeFileSync('./config.json', JSON.stringify(config,null ,"\t"));
 }
 
 
