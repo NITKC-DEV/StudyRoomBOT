@@ -41,7 +41,7 @@ exports.bot = async function join(guild){
         .setTitle('StudyRoomBOTを導入していただきありがとうございます')
         .setAuthor({
             name: "StudyRoom BOT",
-            iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
+            iconURL: 'https://cdn.discordapp.com/avatars/1046304160448000072/aa9294120328c547950c7d95f01435c9.webp?size=320',
             url: 'https://discord.com/invite/fpEjBHTAqy'
         })
         .setDescription('現在、このサーバーに参加しているユーザーのデータを作成しています。人数が多いと時間がかかる可能性があります。\n以下にこのBOTについての簡単な説明を記載します。')
