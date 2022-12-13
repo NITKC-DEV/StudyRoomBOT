@@ -10,7 +10,7 @@
   },
   "name": "studyroom-discordbot",
   "description": "",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "botmain.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node .",
