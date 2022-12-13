@@ -34,14 +34,14 @@ exports.bot = async function join(guild){
         }
     }
     fs.writeFileSync('./config.json', JSON.stringify(config,null ,"\t"));
-
+    /*
     //お知らせ
     let embed = new EmbedBuilder()
         .setColor(0x00A0EA)
         .setTitle('StudyRoomBOTを導入していただきありがとうございます')
         .setAuthor({
             name: "StudyRoom BOT",
-            iconURL: 'https://media.discordapp.net/attachments/1004598980929404960/1039920326903087104/nitkc22io-1.png',
+            iconURL: 'https://cdn.discordapp.com/avatars/1046304160448000072/aa9294120328c547950c7d95f01435c9.webp?size=320',
             url: 'https://discord.com/invite/fpEjBHTAqy'
         })
         .setDescription('現在、このサーバーに参加しているユーザーのデータを作成しています。人数が多いと時間がかかる可能性があります。\n以下にこのBOTについての簡単な説明を記載します。')
@@ -73,7 +73,7 @@ exports.bot = async function join(guild){
             iconURL: 'https://avatars.githubusercontent.com/u/107338867?s=200&v=4'
         });
     client.channels.cache.get(guild.systemChannelId).send({embeds: [embed]});
-
+*/
     //自習室データ作成・更新
     const guildMember = await guild.members.fetch()
     let date = JSON.parse(fs.readFileSync('./studyroom.json', 'utf8'));
@@ -126,8 +126,10 @@ exports.user = async function newUser(guild){
         let username = userDate.username;
         let discriminator=userDate.discriminator;
         let icon = userDate.displayAvatarURL()
-        let userPoint = date.date.indexOf(date.date.find(date => date.uid === guild.user.id))
-        if(userPoint === undefined){
+
+        let user=date.date.find(date => date.uid === guild.user.id);
+        let userPoint = date.date.indexOf(user)
+        if(user === undefined){
             date.date.push({
                 "uid": guild.user.id,
                 "name": username + '#' + discriminator,
