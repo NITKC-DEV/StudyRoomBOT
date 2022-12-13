@@ -60,13 +60,24 @@ exports.func = async function studyroom(oldState, newState){
             user.now = true;
             for(let i=0;i<user.guild.length;i++){
                 let role = config.role.find(date => date.guild === user.guild.at(i));
-                let guild = client.guilds.cache.get(user.guild.at(i))
-                if(guild === undefined){
+                let guild = client.guilds.cache.get(user.guild.at(i)) ?? await client.guilds.fetch(user.guild.at(i));
+                if(guild === undefined || guild === null){
                     user.guild.splice(i,1)
                     let index = config.role.indexOf(role)
                     config.role.splice(index,1)
                 }
                 else{
+                    let guildroles = guild.roles.cache.find(date => date.id === role.id) ?? await guild.roles.fetch(role.id)
+
+                    if(guildroles === undefined || guildroles === null){
+                        const newRole = await guild.roles.create({
+                            name: 'Studying now',
+                            color: 0x00A0EA,
+                            reason: "StudyRoom BOTの操作により作成"
+                        });
+                        let index = config.role.indexOf(config.role.find(date => date.guild === guild.id))
+                        config.role.at(index).id = newRole.id
+                    }
                     await guild.members.addRole({
                         user: newState.id,
                         role: role.id
@@ -84,13 +95,24 @@ exports.func = async function studyroom(oldState, newState){
 
             for(let i=0;i<user.guild.length;i++){
                 let role = config.role.find(date => date.guild === user.guild.at(i));
-                let guild = client.guilds.cache.get(user.guild.at(i))
-                if(guild === undefined){
+                let guild = client.guilds.cache.get(user.guild.at(i)) ?? await client.guilds.fetch(user.guild.at(i));
+                if(guild === undefined || guild === null){
                     user.guild.splice(i,1)
                     let index = config.role.indexOf(role)
                     config.role.splice(index,1)
                 }
                 else{
+                    let guildroles = guild.roles.cache.find(date => date.id === role.id) ?? await guild.roles.fetch(role.id)
+
+                    if(guildroles === undefined || guildroles === null){
+                        const newRole = await guild.roles.create({
+                            name: 'Studying now',
+                            color: 0x00A0EA,
+                            reason: "StudyRoom BOTの操作により作成"
+                        });
+                        let index = config.role.indexOf(config.role.find(date => date.guild === guild.id))
+                        config.role.at(index).id = newRole.id
+                    }
                     await guild.members.removeRole({
                         user: newState.id,
                         role: role.id
@@ -108,13 +130,24 @@ exports.func = async function studyroom(oldState, newState){
 
             for(let i=0;i<user.guild.length;i++){
                 let role = config.role.find(date => date.guild === user.guild.at(i));
-                let guild = client.guilds.cache.get(user.guild.at(i))
-                if(guild === undefined){
+                let guild = client.guilds.cache.get(user.guild.at(i)) ?? await client.guilds.fetch(user.guild.at(i));
+                if(guild === undefined || guild === null){
                     user.guild.splice(i,1)
                     let index = config.role.indexOf(role)
                     config.role.splice(index,1)
                 }
                 else{
+                    let guildroles = guild.roles.cache.find(date => date.id === role.id) ?? await guild.roles.fetch(role.id)
+
+                    if(guildroles === undefined || guildroles === null){
+                        const newRole = await guild.roles.create({
+                            name: 'Studying now',
+                            color: 0x00A0EA,
+                            reason: "StudyRoom BOTの操作により作成"
+                        });
+                        let index = config.role.indexOf(config.role.find(date => date.guild === guild.id))
+                        config.role.at(index).id = newRole.id
+                    }
                     await guild.members.removeRole({
                         user: newState.id,
                         role: role.id
@@ -128,13 +161,24 @@ exports.func = async function studyroom(oldState, newState){
 
             for(let i=0;i<user.guild.length;i++){
                 let role = config.role.find(date => date.guild === user.guild.at(i));
-                let guild = client.guilds.cache.get(user.guild.at(i))
-                if(guild === undefined){
+                let guild = client.guilds.cache.get(user.guild.at(i)) ?? await client.guilds.fetch(user.guild.at(i));
+                if(guild === undefined || guild === null){
                     user.guild.splice(i,1)
                     let index = config.role.indexOf(role)
                     config.role.splice(index,1)
                 }
                 else{
+                    let guildroles = guild.roles.cache.find(date => date.id === role.id) ?? await guild.roles.fetch(role.id)
+
+                    if(guildroles === undefined || guildroles === null){
+                        const newRole = await guild.roles.create({
+                            name: 'Studying now',
+                            color: 0x00A0EA,
+                            reason: "StudyRoom BOTの操作により作成"
+                        });
+                        let index = config.role.indexOf(config.role.find(date => date.guild === guild.id))
+                        config.role.at(index).id = newRole.id
+                    }
                     await guild.members.addRole({
                         user: newState.id,
                         role: role.id
