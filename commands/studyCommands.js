@@ -376,7 +376,7 @@ module.exports =
                 let user = interaction.user.id
                 let guild = interaction.guild
 
-                if (guild.members.guild.voiceStates.cache.size === 0){
+                if (guild.members.guild.voiceStates.cache.get(user) === undefined) {
                     await interaction.reply({ content: '追加したいVCに参加してから実行してください。', ephemeral: true });
                 }
                 else{
@@ -409,7 +409,7 @@ module.exports =
                 let user = interaction.user.id
                 let guild = interaction.guild
 
-                if (guild.members.guild.voiceStates.cache.size === 0){
+                if (guild.members.guild.voiceStates.cache.get(user) === undefined){
                     await interaction.reply({ content: '削除したいVCに参加してから実行してください。', ephemeral: true });
                 }
                 else{
