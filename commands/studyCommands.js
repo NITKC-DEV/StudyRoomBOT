@@ -376,12 +376,12 @@ module.exports =
                 let user = interaction.user.id
                 let guild = interaction.guild
 
-                if (guild.members.guild.voiceStates.cache.get(user) === undefined) {
+                if (guild.voiceStates.cache.get(user) === undefined) {
                     await interaction.reply({ content: '追加したいVCに参加してから実行してください。', ephemeral: true });
                 }
                 else{
                     //現在入ってるVC取得 その2
-                    let id = guild.members.guild.voiceStates.cache.get(user).channelId
+                    let id = guild.voiceStates.cache.get(user).channelId
                     let name = guild.channels.cache.get(id).name
 
                     const date = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
@@ -409,12 +409,12 @@ module.exports =
                 let user = interaction.user.id
                 let guild = interaction.guild
 
-                if (guild.members.guild.voiceStates.cache.get(user) === undefined){
+                if (guild.voiceStates.cache.get(user) === undefined){
                     await interaction.reply({ content: '削除したいVCに参加してから実行してください。', ephemeral: true });
                 }
                 else{
                     //現在入ってるVC取得 その2
-                    let id = guild.members.guild.voiceStates.cache.get(user).channelId
+                    let id = guild.voiceStates.cache.get(user).channelId
                     let name = guild.channels.cache.get(id).name
 
                     const date = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
